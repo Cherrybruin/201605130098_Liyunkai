@@ -3,8 +3,8 @@
 
 # 请根据需求自己补充头文件、函数体输入参数。
 
-import torch
 import numpy
+import torch
 
 ###################################
 # 2 Vectorization
@@ -120,7 +120,9 @@ def pad_constant_central(array, acval):
     for batch in array:
         before_x, before_y = (max_batch[0] - batch.shape[0]) / 2, (max_batch[1] - batch.shape[1]) / 2
         after_x, after_y = max_batch[0] - batch.shape[0] - before_x, max_batch[1] - batch.shape[1] - before_y
+        print(batch)
         batch = numpy.pad(batch, ((before_x, after_x), (before_y, after_y)), "constant", constant_value=acval)
+        print(batch)
     return array
 
 
@@ -181,8 +183,10 @@ if __name__ == "__main__":
 
     sparseinput = [[[1., 1.], [2.], [1.2]], [[2.3, 4.0], [6., 7, 8., 9, ]]]
     input = torch.randn(3, 3, 3).numpy()
-    print(input)
-    print(slice_fixed_point(sparseinput, (0, 0, 0), (1, 2, 2)))
-    print(slice_last_point(sparseinput, 1))
+    # print(input)
+    # print(slice_fixed_point(sparseinput, (0, 0, 0), (1, 2, 2)))
+    # print(slice_last_point(sparseinput, 1))
+    #
+    # print(slice_random_point(input, (2, 1)))
 
-    print(slice_random_point(input, (2, 1)))
+    print(pad_constant_central(input, 0))
